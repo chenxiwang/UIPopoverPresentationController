@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "PopoverViewController.h"
-#import "KSCustomPopoverBackgroundView.h"
 #import "NoArrowPopoverBackgroundView.h"
 @interface ViewController ()
 @property (strong, nonatomic) UIButton *button;
@@ -78,15 +77,15 @@
 - (void)buttonClick:(UIButton *)sender{
     self.buttonPopVC = [[PopoverViewController alloc] init];
     self.buttonPopVC.modalPresentationStyle = UIModalPresentationPopover;
-    self.buttonPopVC.popoverPresentationController.sourceView = _button;  //rect参数是以view的左上角为坐标原点（0，0）
-    self.buttonPopVC.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMinX(_button.frame), CGRectGetMaxY(_button.frame)+15, 0, 0); //指定箭头所指区域的矩形框范围（位置和尺寸），以view的左上角为坐标原点
+    self.buttonPopVC.popoverPresentationController.sourceView = sender;  //rect参数是以view的左上角为坐标原点（0，0）
+    self.buttonPopVC.popoverPresentationController.sourceRect = sender.bounds; //指定箭头所指区域的矩形框范围（位置和尺寸），以view的左上角为坐标原点
     self.buttonPopVC.preferredContentSize = CGSizeMake(_button.frame.size.width+20,200);
-    self.buttonPopVC.popoverPresentationController.permittedArrowDirections = 0; //箭头方向
+    self.buttonPopVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp; //箭头方向
     self.buttonPopVC.popoverPresentationController.delegate = self;
     //self.buttonPopVC.popoverPresentationController.backgroundColor = [UIColor redColor];
     self.buttonPopVC.popoverPresentationController.popoverBackgroundViewClass = [NoArrowPopoverBackgroundView class];
     [self presentViewController:self.buttonPopVC animated:YES completion:^{
-        self.buttonPopVC.view.layer.cornerRadius = 5;
+      self.buttonPopVC.popoverPresentationController.containerView.backgroundColor = [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:0.3];
     }];
 }
 
