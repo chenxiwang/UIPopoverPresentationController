@@ -97,9 +97,6 @@
     return YES;   //点击蒙版popover不消失， 默认yes
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
